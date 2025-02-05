@@ -78,4 +78,4 @@ Familiarizarte con pthread_create, pthread_mutex_lock, pthread_mutex_unlock 🤓
 |`utils.c`    | Funciones auxiliares (tiempo, logs, etc.) |
 | include     || 
 |`philo.h`    | Definiciones y prototipos |
-|`Makefile`   | Compilación del programa | 
+| Makefile    | Compilación del programa | 
