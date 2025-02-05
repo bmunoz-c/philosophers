@@ -78,14 +78,4 @@ Familiarizarte con pthread_create, pthread_mutex_lock, pthread_mutex_unlock 🤓
 |`utils.c`    | Funciones auxiliares (tiempo, logs, etc.) |
 | include     || 
 |`philo.h`    | Definiciones y prototipos |
-| Makefile    | Compilación del programa | 
-
-philosophers/
-│── src/
-│   ├── main.c         # Punto de entrada
-│   ├── philo.c        # Lógica de los filósofos
-│   ├── init.c         # Inicialización de datos
-│   ├── utils.c        # Funciones auxiliares (tiempo, logs, etc.)
-│── include/
-│   ├── philo.h        # Definiciones y prototipos
-│── Makefile           # Compilación del programa
+|`Makefile`   | Compilación del programa | 
