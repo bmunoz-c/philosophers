@@ -1,5 +1,6 @@
 /*<p align="center">
-  <img src="https://github.com/ayogun/42-project-badges/raw/main/badges/minishelle.png" alt="minishell_badge"/>
+  <img src="TU_URL_AQUI" alt="philosophers_badge"/>
+
 </p>
 *\
 
