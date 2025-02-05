@@ -6,7 +6,7 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:22:30 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/05 21:57:22 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/05 23:34:37 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <libft/libft.h>
 
 typedef struct s_philo
 {
@@ -27,6 +28,7 @@ typedef struct s_philo
     pthread_mutex_t	*r_fork;
     int				meals_eaten;
     long		    last_eat;
+    struct s_data	*data;
 }					t_philo;
 
 typedef struct s_data
@@ -43,15 +45,12 @@ typedef struct s_data
     t_philo			*philos;
 }					t_data;
 
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-
 long    get_time(void);
-
-int     init_simulation(t_data *data, int argc, char **argv);
 
 void    start_simulation(t_data *data);
 
 void    cleanup(t_data *data);
+
+int     init_simulation(t_data *data, int argc, char **argv);
 
 #endif

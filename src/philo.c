@@ -6,7 +6,7 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:40:47 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/05 22:25:26 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/06 00:21:46 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,39 @@ void    *philosopher_routine(void *arg)
     t_philo *philo;
 
     philo = (t_philo *)arg;
+    pthread_mutex_lock(&philo->data->simulation_mutex);
+    philo->last_eat = get_time();
+    pthread_mutex_unlock(&philo->data->simulation_mutex);
     while (1)
     {
-        pthread_mutex_lock(philo->data->simulation_mutex);
+        pthread_mutex_lock(&philo->data->simulation_mutex);
         if (!philo->data->simulation_running)
         {
-            pthread_mutex_unlock(philo->data->simulation_mutex);
+            pthread_mutex_unlock(&philo->data->simulation_mutex);
             break ;
         }
-        pthread_mutex_unlock(philo->data->simulation_mutex);
+        if (get_time() - philo->last_eat > philo->data->time_to_die)
+        {
+            printf("Philosopher %d died\n", philo->id);
+            philo->data->simulation_running = 0;
+            pthread_mutex_unlock(&philo->data->simulation_mutex);
+            return (NULL);
+        }
+        pthread_mutex_unlock(&philo->data->simulation_mutex);
         printf("Philosopher %d is thinking\n", philo->id);
+        usleep(1000);
         pthread_mutex_lock(philo->l_fork);
         printf("Philosopher %d took left fork\n", philo->id);
         pthread_mutex_lock(philo->r_fork);
         printf("Philosopher %d took right fork\n", philo->id);
-        printf("Philosopher %d is eating\n", philo->id);
+        pthread_mutex_lock(&philo->data->simulation_mutex);
         philo->last_eat = get_time();
         philo->meals_eaten++;
+        pthread_mutex_unlock(&philo->data->simulation_mutex);
+        printf("Philosopher %d is eating\n", philo->id);
         usleep(philo->data->time_to_eat * 1000);
+       // philo->last_eat = get_time();
+       // philo->meals_eaten++;
         pthread_mutex_unlock(philo->r_fork);
         pthread_mutex_unlock(philo->l_fork);
         printf("Philosopher %d finish eating and is sleeping\n", philo->id);

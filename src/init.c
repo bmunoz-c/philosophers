@@ -6,11 +6,11 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:31:03 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/05 22:22:07 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/06 00:23:55 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include <philo.h>
 
 //Devuelve el tiempo actual en milisegundos
 long    get_time(void)
@@ -50,11 +50,12 @@ int init_philosophers(t_data *data)
     i = 0;
     while (i < data->num_philo)
     {
-        data->philos[i].id = i;
+        data->philos[i].id = i + 1;
         data->philos[i].meals_eaten = 0;
-        data->philos[i].last_eat = 0;
+        data->philos[i].last_eat = get_time();
         data->philos[i].l_fork = &data->forks[i];
         data->philos[i].r_fork = &data->forks[(i + 1) % data->num_philo];
+        data->philos[i].data = data;
         i++;
     }
     return (0);
@@ -65,13 +66,13 @@ int valid_arguments(int argc, char **argv)
     int i;
     int num;
     
-    i = 0;
+    i = 1;
     while (i < argc)
     {
        num = ft_atoi(argv[i]);
        if (num <= 0)
        {
-            printf("Error: Arguument %d (%s) must be a positive number\n", i, argv[i]);
+            printf("Error: Argument %d (%s) must be a positive number\n", i, argv[i]);
             return (0);
        }
         i++;
@@ -83,7 +84,10 @@ int valid_arguments(int argc, char **argv)
 int init_simulation(t_data *data, int argc, char **argv)
 {
     if (argc < 5 || argc > 6)
-        return (printf("Error: invalid number of arguments\n"), 1);
+    {
+        printf("Error: invalid number of arguments\n \tTry ~ ./philo +X X X X ~\n");
+        return ( 1);
+    }
     if (!valid_arguments(argc, argv))
         return (1);
     data->num_philo = ft_atoi(argv[1]);
