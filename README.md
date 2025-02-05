@@ -1,15 +1,16 @@
-/*<p align="center">
+<p align="center">
   <img src="https://github.com/mcombeau/mcombeau/raw/main/42_badges/philosophersn.png"/>
 
 </p>
-*\
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/project-purple?logo=C&" alt="minishell_badge"/>
   <img src="https://img.shields.io/badge/cursus-black?logo=42&" alt="minishell_badge"/>
 </p>
 
-# **Philosophers**
+<h1 align="center">🥂 Philosophers 🥂</h1>    
+<p align="center">
 
 El proyecto Philosophers de 42 Barcelona es un ejercicio de concurrencia y sincronización en C, donde trabajarás con hilos (threads) y mutexes para simular el problema de los filósofos comensales. Aquí tienes un resumen para empezar:
 </p>
