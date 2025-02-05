@@ -1,5 +1,11 @@
-<p align="center">
+/*<p align="center">
   <img src="https://github.com/ayogun/42-project-badges/raw/main/badges/minishelle.png" alt="minishell_badge"/>
+</p>
+*\
+
+<p align="center">
+  <img src="https://img.shields.io/badge/project-purple?logo=C&" alt="minishell_badge"/>
+  <img src="https://img.shields.io/badge/cursus-black?logo=42&" alt="minishell_badge"/>
 </p>
 
 # **Philosophers**
