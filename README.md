@@ -1,6 +1,9 @@
 # **Philosophers**
 
 El proyecto Philosophers de 42 Barcelona es un ejercicio de concurrencia y sincronización en C, donde trabajarás con hilos (threads) y mutexes para simular el problema de los filósofos comensales. Aquí tienes un resumen para empezar:
+</p>
+
+---
 
 ## 📌 **Objetivo del Proyecto**
 Simular un grupo de filósofos sentados alrededor de una mesa con tenedores compartidos, asegurando que coman sin caer en un deadlock o inanición (starvation).
