@@ -1,5 +1,5 @@
 /*<p align="center">
-  <img src="TU_URL_AQUI" alt="philosophers_badge"/>
+  <img src="https://github.com/mcombeau/mcombeau/raw/main/42_badges/philosophersn.png"/>
 
 </p>
 *\
