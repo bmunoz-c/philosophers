@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/ayogun/42-project-badges/raw/main/badges/minishelle.png" alt="minishell_badge"/>
+</p>
+
 # **Philosophers**
 
 El proyecto Philosophers de 42 Barcelona es un ejercicio de concurrencia y sincronización en C, donde trabajarás con hilos (threads) y mutexes para simular el problema de los filósofos comensales. Aquí tienes un resumen para empezar:
@@ -22,34 +26,29 @@ Condiciones de sincronización: Para evitar problemas de race conditions y deadl
 Gestión del tiempo (gettimeofday o usleep): Para controlar los tiempos de acción de cada filósofo.
 
 ## 📂 **Estructura Típica del Proyecto**
-philo.c: Contendrá la lógica principal de la simulación.
-philo.h: Archivo de cabecera con estructuras y prototipos.
-utils.c: Funciones auxiliares para el manejo de tiempo y mensajes.
-Makefile: Para compilar fácilmente el programa.
+- **philo.c**: Contendrá la lógica principal de la simulación.
+- **philo.h**: Archivo de cabecera con estructuras y prototipos.
+- **utils.c**: Funciones auxiliares para el manejo de tiempo y mensajes.
+- **Makefile**: Para compilar fácilmente el programa.
 
 ## 🚀 **Primeros Pasos**
 Leer el enunciado completo 📖
 Familiarizarte con pthread_create, pthread_mutex_lock, pthread_mutex_unlock 🤓
 
 ## 📝 **Plan de Trabajo para Philosophers**
-Configurar la estructura de datos
-
-Definir una estructura para almacenar información de cada filósofo.
-Definir una estructura para los tenedores y la simulación general.
-Crear los hilos
-
-Cada filósofo será un hilo que ejecutará su propio ciclo de vida.
-Implementar los mutexes
-
-Usaremos pthread_mutex_t para controlar el acceso a los tenedores.
-Gestionar los tiempos
-
-Controlar cuánto tiempo un filósofo pasa comiendo, pensando o esperando.
-Evitar el deadlock y la inanición
-
-Asegurar que los filósofos no se queden bloqueados y que todos puedan comer.
-Implementar un solo filósofo y asegurarte de que puede comer y pensar correctamente 🍽️
-Escalar la solución para múltiples filósofos sin bloqueos 🔄
+- Configurar la estructura de datos
+- Definir una estructura para almacenar información de cada filósofo.
+- Definir una estructura para los tenedores y la simulación general.
+- Crear los hilos
+- Cada filósofo será un hilo que ejecutará su propio ciclo de vida.
+- Implementar los mutexes
+- Usaremos pthread_mutex_t para controlar el acceso a los tenedores.
+- Gestionar los tiempos.
+- Controlar cuánto tiempo un filósofo pasa comiendo, pensando o esperando.
+- Evitar el deadlock y la inanición
+- Asegurar que los filósofos no se queden bloqueados y que todos puedan comer.
+- Implementar un solo filósofo y asegurarte de que puede comer y pensar correctamente 🍽️
+- Escalar la solución para múltiples filósofos sin bloqueos 🔄
 
 ## 📂 **Estructura Inicial del Proyecto**
 
