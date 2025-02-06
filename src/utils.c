@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:13:44 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 17:42:10 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:49:12 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ void	cleanup(t_data *data)
 	while (i < data->num_philo)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(data->philos[i].meals_eaten_mutex);
+		pthread_mutex_destroy(data->philos[i].last_eat_mutex);
+		free(data->philos[i].meals_eaten_mutex);
+		free(data->philos[i].last_eat_mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&data->simulation_mutex);

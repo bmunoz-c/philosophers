@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:31:03 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 17:46:28 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:44:50 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,15 @@ int	init_philosophers(t_data *data)
 		data->philos[i].last_eat = get_time_ms();
 		data->philos[i].l_fork = &data->forks[i];
 		data->philos[i].r_fork = &data->forks[(i + 1) % data->num_philo];
+		data->philos[i].meals_eaten_mutex = malloc(sizeof(pthread_mutex_t));
+		data->philos[i].last_eat_mutex = malloc(sizeof(pthread_mutex_t));
+		pthread_mutex_init(data->philos[i].meals_eaten_mutex, NULL);
+		pthread_mutex_init(data->philos[i].last_eat_mutex, NULL);
 		data->philos[i].data = data;
 		i++;
 	}
+	/*if (data->num_philo == 1)
+		data->philos[0].l_fork = NULL;*/
 	return (0);
 }
 

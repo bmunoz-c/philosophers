@@ -6,11 +6,11 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:40:47 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 18:05:07 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/06 22:01:49 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include <philo.h>
 
 /*
  *		Function Name:	philosopher_routine
@@ -33,6 +33,8 @@
  *
  *			void * - Always returns NULL when the philosopher exits its routine.
  */
+
+//TODO Si solo hay un filosofo, coger un fork, esperar el tiempo de muerte, morir.
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*philo;
@@ -57,16 +59,36 @@ void	*philosopher_routine(void *arg)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&philo->data->simulation_mutex);
-		printf("Philosopher %d is thinking\n", philo->id);
+		// print_log(get_time(ms) - philo->data->start_time, philo->id, "is thinking");
+		printf("%ld Philosopher %d is thinking\n", get_time_ms()
+			- philo->data->start_time, philo->id);
 		usleep(1000);
+		if (philo->id % 2 == 0)
+		{
+			pthread_mutex_lock(philo->r_fork);
+			printf("Philosopher %d took right fork\n", philo->id);
+			pthread_mutex_lock(philo->l_fork);
+			printf("Philosopher %d took left fork\n", philo->id);
+		}
+		else
+		{
+			pthread_mutex_lock(philo->l_fork);
+			printf("Philosopher %d took left fork\n", philo->id);
+			pthread_mutex_lock(philo->r_fork);
+			printf("Philosopher %d took left fork\n", philo->id);
+		}
+		/*
 		pthread_mutex_lock(philo->l_fork);
 		printf("Philosopher %d took left fork\n", philo->id);
 		pthread_mutex_lock(philo->r_fork);
 		printf("Philosopher %d took right fork\n", philo->id);
-		pthread_mutex_lock(&philo->data->simulation_mutex);
+		*/
+		pthread_mutex_lock(philo->last_eat_mutex);
 		philo->last_eat = get_time_ms();
+		pthread_mutex_unlock(philo->last_eat_mutex);
+		pthread_mutex_lock(philo->meals_eaten_mutex);
 		philo->meals_eaten++;
-		pthread_mutex_unlock(&philo->data->simulation_mutex);
+		pthread_mutex_unlock(philo->meals_eaten_mutex);
 		printf("Philosopher %d is eating\n", philo->id);
 		usleep(philo->data->time_to_eat * 1000);
 		pthread_mutex_unlock(philo->r_fork);
@@ -76,6 +98,9 @@ void	*philosopher_routine(void *arg)
 	}
 	return (NULL);
 }
+
+// TODO FUNCION PARA PRINTAR LOS MENSAJES (ms, id_philo, mensaje)
+// Solo printa si data->simulation_running == 1
 
 /*
  *		Function Name:	monitor_routine
@@ -118,17 +143,22 @@ void	*monitor_routine(void *arg)
 		i = 0;
 		while (i < data->num_philo)
 		{
+			pthread_mutex_lock(data->philos[i].last_eat_mutex);
 			if (get_time_ms() - data->philos[i].last_eat > data->time_to_die)
 			{
+				pthread_mutex_unlock(data->philos[i].last_eat_mutex);
 				printf("Philosopher %d died\n", data->philos[i].id);
 				pthread_mutex_lock(&data->simulation_mutex);
 				data->simulation_running = 0;
 				pthread_mutex_unlock(&data->simulation_mutex);
 				return (NULL);
 			}
+			pthread_mutex_unlock(data->philos[i].last_eat_mutex);
+			pthread_mutex_lock(data->philos[i].meals_eaten_mutex);
 			if (data->meals_required != -1
 				&& data->philos[i].meals_eaten >= data->meals_required)
 				full_philos++;
+			pthread_mutex_unlock(data->philos[i].meals_eaten_mutex);
 			i++;
 		}
 		if (data->meals_required != -1 && full_philos == data->num_philo)
@@ -186,8 +216,8 @@ void	start_simulation(t_data *data)
 	}
 	cleanup(data);
 }
-/* 
- //Check if any philosopher dies 
+/*
+ //Check if any philosopher dies
 void	check_if_dead(t_data *data)
 {
 	int	i;

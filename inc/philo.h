@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:22:30 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 17:39:06 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:42:35 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <limits.h>
+
 
 typedef struct s_philo
 {
@@ -27,6 +29,8 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	int				meals_eaten;
+	pthread_mutex_t	*meals_eaten_mutex;
+	pthread_mutex_t	*last_eat_mutex;
 	long			last_eat;
 	struct s_data	*data;
 }					t_philo;
