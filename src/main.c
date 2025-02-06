@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:34:59 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/05 23:35:34 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:40:47 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_data  data;
+	t_data	data;
 
-    if (init_simulation(&data, argc, argv) != 0)
-        return (1);
-    start_simulation(&data);
-   // cleanup(&data);
-    return (0);
+	if (init_simulation(&data, argc, argv) != 0)
+		return (1);
+	start_simulation(&data);
+	return (0);
 }
