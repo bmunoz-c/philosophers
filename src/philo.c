@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:40:47 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 22:01:49 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/06 22:03:43 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
  *			void * - Always returns NULL when the philosopher exits its routine.
  */
 
-//TODO Si solo hay un filosofo, coger un fork, esperar el tiempo de muerte, morir.
+//TODO Si solo hay un filosofo,coger un fork,esperar el tiempo de muerte,morir.
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*philo;
@@ -77,12 +77,6 @@ void	*philosopher_routine(void *arg)
 			pthread_mutex_lock(philo->r_fork);
 			printf("Philosopher %d took left fork\n", philo->id);
 		}
-		/*
-		pthread_mutex_lock(philo->l_fork);
-		printf("Philosopher %d took left fork\n", philo->id);
-		pthread_mutex_lock(philo->r_fork);
-		printf("Philosopher %d took right fork\n", philo->id);
-		*/
 		pthread_mutex_lock(philo->last_eat_mutex);
 		philo->last_eat = get_time_ms();
 		pthread_mutex_unlock(philo->last_eat_mutex);
