@@ -6,7 +6,7 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:13:44 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 14:16:45 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:06:21 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	valid_arguments(int argc, char **argv)
 	return (1);
 }
 
-int ft_strncmp_ph(const char *s1, const char *s2)
+int	ft_strncmp_ph(const char *s1, const char *s2)
 {
-	unsigned char *c1;
-	unsigned char *c2;
-	int i;
+	unsigned char	*c1;
+	unsigned char	*c2;
+	int				i;
 
 	i = 0;
 	c1 = (unsigned char *)s1;
@@ -61,18 +61,24 @@ int ft_strncmp_ph(const char *s1, const char *s2)
 		i++;
 	return (c1[i] - c2[i]);
 }
-	
-void print_log(char *action_txt, long action_time, t_philo *philo)
-{
-    int dead;
 
-    action_time = get_time_ms() - philo->data->start_time;
-    pthread_mutex_lock(&philo->data->simulation_mutex);
-    dead = !philo->data->simulation_running;
-	// TODO Solo printa si data->simulation_running == 1
-    if (!dead || !ft_strncmp_ph(action_txt, "is dead"))
-        printf("%ld Philosopher %d %s\n", action_time, philo->id, action_txt);
-    pthread_mutex_unlock(&philo->data->simulation_mutex);
+/*
+ *		Description:
+ *			This function prints the action of a philosopher with the
+ *			current time and philosopher id.
+ *
+ *		//TODO Solo printa si data->simulation_running == 1
+ */
+void	print_log(char *action_txt, long action_time, t_philo *philo)
+{
+	int	dead;
+
+	action_time = get_time_ms() - philo->data->start_time;
+	pthread_mutex_lock(&philo->data->simulation_mutex);
+	dead = !philo->data->simulation_running;
+	if (!dead || !ft_strncmp_ph(action_txt, "is dead"))
+		printf("%ld Philosopher %d %s\n", action_time, philo->id, action_txt);
+	pthread_mutex_unlock(&philo->data->simulation_mutex);
 }
 
 /*

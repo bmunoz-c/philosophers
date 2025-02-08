@@ -6,7 +6,7 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:43:16 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 14:00:03 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:04:55 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	*philosopher_routine(void *arg)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&philo->data->simulation_mutex);
-		// print_log(get_time(ms) - philo->data->start_time, philo->id, "is thinking");
+		// print_log(get_time(ms) - philo->data->start_time, philo->id, 
+			"is thinking");
         philo->act_time = get_time_ms() - philo->data->start_time;
 		print_log("is thinking", philo->act_time, philo);
-		//printf("%ld Philosopher %d is thinking\n", get_time_ms()- philo->data->start_time, philo->id);
+		//printf("%ld Philosopher %d is thinking\n",
+			get_time_ms() - philo->data->start_time, philo->id);
 		usleep(1000);
 		if (philo->id % 2 == 0)
 		{

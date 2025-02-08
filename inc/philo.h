@@ -6,7 +6,7 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:22:30 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 14:22:53 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:08:29 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <limits.h>
+
 typedef struct s_philo
 {
 	int				id;
@@ -52,7 +53,8 @@ typedef struct s_data
 long				get_time_ms(void);
 int					valid_arguments(int argc, char **argv);
 int					ft_strncmp_ph(const char *s1, const char *s2);
-void 				print_log(char *action_txt, long action_time, t_philo *philo);
+void				print_log(char *action_txt, long action_time,
+						t_philo *philo);
 void				cleanup(t_data *data);
 
 //_____Init_____//
@@ -81,7 +83,5 @@ int					check_death(t_philo *philo);
 void				*philosopher_routine(void *arg);
 void				handle_single_philo(t_data *data);
 void				start_simulation(t_data *data);
-
-
 
 #endif

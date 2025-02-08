@@ -6,7 +6,7 @@
 /*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:39:11 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 14:07:33 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/08 15:01:49 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_if_dead(t_data *data, int i)
 	return (0);
 }
 
-int check_meals(t_data *data, int *full_philos, int i)
+int	check_meals(t_data *data, int *full_philos, int i)
 {
 	pthread_mutex_lock(data->philos[i].meals_eaten_mutex);
 	if (data->meals_required != -1
@@ -62,6 +62,7 @@ int	check_philosophers(t_data *data)
 	}
 	return (0);
 }
+
 /*
  *		Description:
  *			This function defines the routine for the monitor thread.
@@ -72,7 +73,7 @@ int	check_philosophers(t_data *data)
  *
  *		Return NULL when the monitoring routine ends.
  */
- void	*monitor_routine(void *arg)
+void	*monitor_routine(void *arg)
 {
 	t_data	*data;
 
@@ -91,4 +92,4 @@ int	check_philosophers(t_data *data)
 		usleep(5000);
 	}
 	return (NULL);
-} 
+}
