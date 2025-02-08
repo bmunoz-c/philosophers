@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:13:44 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 21:49:12 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:16:45 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*
- *		Function Name:	get_time
- *
- *		Description:
- *
- *			This function retrieves the current time in milliseconds.
- *
- *		Return Value:
- *
- *			long - Returns the current time in milliseconds since the epoch.
- */
+//This function retrieves the current time in milliseconds.
 long	get_time_ms(void)
 {
 	struct timeval	tv;
@@ -32,22 +22,11 @@ long	get_time_ms(void)
 }
 
 /*
- *		Function Name:	valid_arguments
- *
  *		Description:
- *
  *			This function checks if the command-line arguments provided
  *			are valid. It ensures that each argument is a positive number.
- *
- *		Parameters:
- *
- *			int		argc	-	The number of command-line arguments.
- *			char	**argv	-	The array of argument strings.
- *
- *		Return Value:
- *
- *			int - Returns 1 if all arguments are valid positive numbers.
- *					Returns 0 if any argument is invalid.
+ 
+ *		Returns 1 if all arguments are valid positive numbers.
  */
 int	valid_arguments(int argc, char **argv)
 {
@@ -69,21 +48,38 @@ int	valid_arguments(int argc, char **argv)
 	return (1);
 }
 
+int ft_strncmp_ph(const char *s1, const char *s2)
+{
+	unsigned char *c1;
+	unsigned char *c2;
+	int i;
+
+	i = 0;
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (c1[i] - c2[i]);
+}
+	
+void print_log(char *action_txt, long action_time, t_philo *philo)
+{
+    int dead;
+
+    action_time = get_time_ms() - philo->data->start_time;
+    pthread_mutex_lock(&philo->data->simulation_mutex);
+    dead = !philo->data->simulation_running;
+	// TODO Solo printa si data->simulation_running == 1
+    if (!dead || !ft_strncmp_ph(action_txt, "is dead"))
+        printf("%ld Philosopher %d %s\n", action_time, philo->id, action_txt);
+    pthread_mutex_unlock(&philo->data->simulation_mutex);
+}
+
 /*
- *		Function Name:	cleanup
- *
  *		Description:
  *
  *			This function frees allocated memory and destroys mutexes
  *			to properly clean up resources at the end of the simulation.
- *
- *		Parameters:
- *
- *			t_data	*data	-	The pointer to the t_data struct containing
- *								the simulation data and allocated resources.
- *
- *		No Return Value:
- *
  */
 void	cleanup(t_data *data)
 {

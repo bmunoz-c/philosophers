@@ -3,35 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:31:03 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/06 21:44:50 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:13:24 by borjamc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
 /*
- *		Function Name:	init_mutexes
- *
  *		Description:
+ *			Allocates and initializes mutexes for philosophers' forks.
  *
- *			This function initializes the mutexes for the philosophers' forks.
- *			It allocates memory for the required number of mutexes and
- *			initializes each one.
- *
- *		Parameters:
- *
- *			t_data	*data	-	The pointer to the t_data struct containing
- *								the number of philosophers and execution data.
- *
- *		Return Value:
- *
- *			int - Returns 0 if all mutexes are initialized successfully.
- *					Returns 1 if memory allocation fails or a mutex
- *					initialization fails.
- */
+ *		Return 0 on success, 1 on failure.
+*/
 int	init_mutexes(t_data *data)
 {
 	int	i;
@@ -50,24 +36,11 @@ int	init_mutexes(t_data *data)
 }
 
 /*
- *		Function Name:	init_philosophers
- *
  *		Description:
+ *			Allocates and initializes philosopher structures with  
+ *			ID, meal count, last meal time, and forks.
  *
- *			This function initializes the philosophers' data structures.
- *			It allocates memory for the philosophers and sets their
- *			initial attributes, including ID, meal count, last meal time,
- *			and assigned forks.
- *
- *		Parameters:
- *
- *			t_data	*data	-	The pointer to the t_data struct containing
- *								the number of philosophers and execution data.
- *
- *		Return Value:
- *
- *			int - Returns 0 if all philosophers are initialized successfully.
- *					Returns 1 if memory allocation fails.
+ *		Return 0 on success, 1 on failure.
  */
 int	init_philosophers(t_data *data)
 {
@@ -97,26 +70,11 @@ int	init_philosophers(t_data *data)
 }
 
 /*
- *		Function Name:	init_simulation
- *
  *		Description:
- *
- *			This function initializes the simulation by validating the input
- *			arguments, setting up the simulation parameters, and initializing
- *			the necessary mutexes and philosopher structures.
- *
- *		Parameters:
- *
- *			t_data	*data	-	The pointer to the t_data struct where
- *								the simulation data will be stored.
- *			int		argc	-	The number of command-line arguments.
- *			char	**argv	-	The array of argument strings.
- *
- *		Return Value:
- *
- *			int - Returns 0 if the simulation is initialized successfully.
- *					Returns 1 if there is an error in argument validation,
- *					memory allocation, or mutex initialization.
+ *			Validates input, sets simulation parameters, and initializes  
+ *			mutexes and philosopher structures.
+
+ *		Return 0 on success, 1 on failure.
  */
 int	init_simulation(t_data *data, int argc, char **argv)
 {

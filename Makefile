@@ -1,7 +1,7 @@
 NAME 			=	philo
 CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
-##CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=thread
+#CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
+#CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=thread
 
 
 LIBS			=	-lpthread -Linc/libft -lft
@@ -12,7 +12,7 @@ HEADER			= 	inc/philo.h
 SRC_DIR 		= 	src/
 OBJ_DIR 		= 	obj/
 SRC 			:=	main.c \
-					init.c utils.c philo.c
+					init.c utils.c philo_run.c philo_action.c action_utils.c monitoring.c
 
 SRC				:=	$(addprefix $(SRC_DIR), $(SRC))
 OBJ				=	$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
