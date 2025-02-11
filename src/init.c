@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:31:03 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:02:26 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:10:13 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *		Description:
- *			Allocates and initializes mutexes for philosophers' forks.
+ *			Allocates memory for forks and initializes their mutexes.
  *
  *		Return 0 on success, 1 on failure.
 */
@@ -37,8 +37,8 @@ int	init_mutexes(t_data *data)
 
 /*
  *		Description:
- *			Allocates and initializes philosopher structures with  
- *			ID, meal count, last meal time, and forks.
+ *			Allocates memory for philosophers, initializes their  
+ *			attributes, assigns forks, and sets up mutexes.
  *
  *		Return 0 on success, 1 on failure.
  */
@@ -64,15 +64,13 @@ int	init_philosophers(t_data *data)
 		data->philos[i].data = data;
 		i++;
 	}
-	/*if (data->num_philo == 1)
-		data->philos[0].l_fork = NULL;*/
 	return (0);
 }
 
 /*
  *		Description:
- *			Validates input, sets simulation parameters, and initializes  
- *			mutexes and philosopher structures.
+ *			Validates input, initializes simulation parameters,  
+ *			and sets up mutexes and philosophers.
 
  *		Return 0 on success, 1 on failure.
  */

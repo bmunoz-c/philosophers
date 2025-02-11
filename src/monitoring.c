@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:39:11 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:01:49 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:22:15 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
+/*
+ *		Description:
+ *			Checks if a specific philosopher has died and updates  
+ *			the simulation status if necessary.
+ *
+ *		Returns 1 if the philosopher is dead, 0 otherwise.
+*/
 int	check_if_dead(t_data *data, int i)
 {
 	pthread_mutex_lock(data->philos[i].last_eat_mutex);
@@ -28,6 +35,13 @@ int	check_if_dead(t_data *data, int i)
 	return (0);
 }
 
+/*
+ *		Description:
+ *			Checks if a philosopher has eaten the required meals and  
+ *			increments the count of full philosophers.
+ *
+ *		Returns 1 if all philosophers are full, 0 otherwise.
+*/
 int	check_meals(t_data *data, int *full_philos, int i)
 {
 	pthread_mutex_lock(data->philos[i].meals_eaten_mutex);
@@ -38,6 +52,13 @@ int	check_meals(t_data *data, int *full_philos, int i)
 	return (*full_philos == data->num_philo);
 }
 
+/*
+ *		Description:
+ *			Checks if any philosopher has died or if all have eaten  
+ *			the required meals, updating the simulation status accordingly.
+ *
+ *		Returns 1 if the simulation should stop, 0 otherwise.
+*/
 int	check_philosophers(t_data *data)
 {
 	int	i;
@@ -65,14 +86,11 @@ int	check_philosophers(t_data *data)
 
 /*
  *		Description:
- *			This function defines the routine for the monitor thread.
- *			It continuously checks if any philosopher has exceeded the
- *			allowed time without eating, in which case the simulation stops.
- *			Additionally, it verifies if all philosophers have eaten the
- *			required number of meals and stops the simulation if so.
+ *			Monitors the simulation, checking if any philosopher has  
+ *			died or if all have eaten the required meals.
  *
  *		Return NULL when the monitoring routine ends.
- */
+*/
 void	*monitor_routine(void *arg)
 {
 	t_data	*data;

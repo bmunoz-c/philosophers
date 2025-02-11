@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo_action.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:11:44 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:03:43 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:16:17 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
+//think action
 void	ft_think(t_philo *philo)
 {
 	philo->act_time = get_time_ms() - philo->data->start_time;
@@ -19,6 +20,7 @@ void	ft_think(t_philo *philo)
 	usleep(1000);
 }
 
+//take forks action
 void	ft_take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
@@ -37,6 +39,7 @@ void	ft_take_forks(t_philo *philo)
 	}
 }
 
+//eat action
 void	ft_eat(t_philo *philo)
 {
 	update_last_eat(philo);
@@ -47,6 +50,7 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->l_fork);
 }
 
+//sleep action
 void	ft_sleep(t_philo *philo)
 {
 	philo->act_time = get_time_ms();

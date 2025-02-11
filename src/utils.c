@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 22:13:44 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:06:21 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:21:16 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ long	get_time_ms(void)
  *		Description:
  *			This function checks if the command-line arguments provided
  *			are valid. It ensures that each argument is a positive number.
- 
+ *
  *		Returns 1 if all arguments are valid positive numbers.
- */
+*/
 int	valid_arguments(int argc, char **argv)
 {
 	int	i;
@@ -68,7 +68,7 @@ int	ft_strncmp_ph(const char *s1, const char *s2)
  *			current time and philosopher id.
  *
  *		//TODO Solo printa si data->simulation_running == 1
- */
+*/
 void	print_log(char *action_txt, long action_time, t_philo *philo)
 {
 	int	dead;
@@ -86,7 +86,7 @@ void	print_log(char *action_txt, long action_time, t_philo *philo)
  *
  *			This function frees allocated memory and destroys mutexes
  *			to properly clean up resources at the end of the simulation.
- */
+*/
 void	cleanup(t_data *data)
 {
 	int	i;

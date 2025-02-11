@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   action_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:15:37 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:03:19 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:21:58 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
+/*
+ *		Description:
+ *			Updates the philosopher's last meal time safely using a mutex.
+*/
 void	update_last_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->last_eat_mutex);
@@ -20,6 +24,10 @@ void	update_last_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->last_eat_mutex);
 }
 
+/*
+ *		Description:
+ *			Increments the philosopher's meal count safely using a mutex.
+*/
 void	update_meals_eaten(t_philo *philo)
 {
 	pthread_mutex_lock(philo->meals_eaten_mutex);
@@ -27,6 +35,12 @@ void	update_meals_eaten(t_philo *philo)
 	pthread_mutex_unlock(philo->meals_eaten_mutex);
 }
 
+/*
+ *		Description:
+ *			Checks if a philosopher has died and updates simulation status.
+ *
+ *		Returns 1 if the philosopher is dead, 0 otherwise.
+*/
 int	check_death(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->simulation_mutex);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_run.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:40:47 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:06:07 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 16:19:58 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 /*
  *		Description:
- *			This function defines the routine for each philosopher thread.
- *			Each philosopher follows a cycle of thinking, taking forks,
- *			eating, and sleeping while checking if the simulation is running.
- *			If a philosopher surpasses the time_to_die without eating,
- *			the simulation ends.
+ *			Executes the philosopher's routine, including thinking,  
+ *			taking forks, eating, and sleeping, while checking for death.
  *
  *		Return NULL when the philosopher exits its routine.
- */
-
-//TODO Si solo hay un filosofo,coger un fork,esperar el tiempo de muerte,morir.
-
+*/
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*philo;
@@ -45,7 +39,11 @@ void	*philosopher_routine(void *arg)
 	return (NULL);
 }
 
-// Solo printa si data->simulation_running == 1
+/*
+ *		Description:
+ *			Handles the routine for a single philosopher, including  
+ *			taking a fork and dying after the time to die.
+*/
 void	handle_single_philo(t_data *data)
 {
 	print_log("has taken a fork", get_time_ms(), &data->philos[0]);
@@ -55,10 +53,10 @@ void	handle_single_philo(t_data *data)
 
 /*
  *		Description:
- *			This function starts the philosopher simulation. It creates a
- *			thread for each philosopher and a separate monitor thread to
- *			check the simulation conditions. After execution, it waits for
- *			all threads to finish and then cleans up allocated resources.
+ *			Starts the simulation by creating philosopher threads  
+ *			and a monitor thread, then waits for all threads to finish.
+ *			After execution, it waits for all threads to finish and 
+ *			then cleans up allocated resources.
  */
 void	start_simulation(t_data *data)
 {
