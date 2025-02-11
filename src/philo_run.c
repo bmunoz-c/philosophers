@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:40:47 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/11 16:19:58 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:30:18 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	*philosopher_routine(void *arg)
 	pthread_mutex_unlock(&philo->data->simulation_mutex);
 	while (1)
 	{
-		if (check_death(philo))
+		if (check_if_dead(philo->data, philo->id - 1))
 			break ;
-		ft_think(philo);
 		ft_take_forks(philo);
 		ft_eat(philo);
 		ft_sleep(philo);
+		ft_think(philo);
 	}
 	return (NULL);
 }

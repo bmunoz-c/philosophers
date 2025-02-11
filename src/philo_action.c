@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:11:44 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/11 16:16:17 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:09:30 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	ft_take_forks(t_philo *philo)
 //eat action
 void	ft_eat(t_philo *philo)
 {
+	if (check_philo_meals(philo))
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
+		return ;
+	}
 	update_last_eat(philo);
 	update_meals_eaten(philo);
 	print_log("is eating", philo->act_time, philo);

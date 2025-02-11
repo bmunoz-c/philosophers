@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:39:11 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/11 16:22:15 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:21:10 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,18 @@
 int	check_if_dead(t_data *data, int i)
 {
 	pthread_mutex_lock(data->philos[i].last_eat_mutex);
-	if (get_time_ms() - data->philos[i].last_eat > data->time_to_die)
+	pthread_mutex_lock(&data->simulation_mutex);
+	if (!data->simulation_running)
 	{
 		pthread_mutex_unlock(data->philos[i].last_eat_mutex);
+		pthread_mutex_unlock(&data->simulation_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&data->simulation_mutex);
+	if (get_time_ms() - data->philos[i].last_eat > data->time_to_die)
+	{
 		print_log("is dead", get_time_ms(), &data->philos[i]);
+		pthread_mutex_unlock(data->philos[i].last_eat_mutex);
 		pthread_mutex_lock(&data->simulation_mutex);
 		data->simulation_running = 0;
 		pthread_mutex_unlock(&data->simulation_mutex);

@@ -6,7 +6,7 @@
 /*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:15:37 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/11 16:21:58 by bmunoz-c         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:31:54 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,15 @@ void	update_meals_eaten(t_philo *philo)
 	pthread_mutex_unlock(philo->meals_eaten_mutex);
 }
 
-/*
- *		Description:
- *			Checks if a philosopher has died and updates simulation status.
- *
- *		Returns 1 if the philosopher is dead, 0 otherwise.
-*/
-int	check_death(t_philo *philo)
+int	check_philo_meals(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->simulation_mutex);
-	if (!philo->data->simulation_running)
+	pthread_mutex_lock(philo->meals_eaten_mutex);
+	if (philo->data->meals_required != -1
+		&& philo->meals_eaten >= philo->data->meals_required)
 	{
-		pthread_mutex_unlock(&philo->data->simulation_mutex);
+		pthread_mutex_unlock(philo->meals_eaten_mutex);
 		return (1);
 	}
-	if (get_time_ms() - philo->last_eat > philo->data->time_to_die)
-	{
-		print_log("is dead", get_time_ms(), philo);
-		philo->data->simulation_running = 0;
-		pthread_mutex_unlock(&philo->data->simulation_mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->data->simulation_mutex);
+	pthread_mutex_unlock(philo->meals_eaten_mutex);
 	return (0);
 }

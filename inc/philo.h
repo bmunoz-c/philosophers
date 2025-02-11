@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: borjamc <borjamc@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmunoz-c <bmunoz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 21:22:30 by borjamc           #+#    #+#             */
-/*   Updated: 2025/02/08 15:08:29 by borjamc          ###   ########.fr       */
+/*   Updated: 2025/02/11 17:32:11 by bmunoz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				ft_sleep(t_philo *philo);
 //_____Action Utils_____//
 void				update_last_eat(t_philo *philo);
 void				update_meals_eaten(t_philo *philo);
-int					check_death(t_philo *philo);
+int					check_philo_meals(t_philo *philo);
 
 //_____Philosopher_____//
 void				*philosopher_routine(void *arg);
